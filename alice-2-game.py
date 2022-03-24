@@ -130,6 +130,7 @@ def play_game(res, req):
     user_id = req['session']['user_id']
     attempt = sessionStorage[user_id]['attempt']
     if attempt == 1:
+        # Popik
         # если попытка первая, то случайным образом выбираем город для гадания
         city = random.choice(list(cities))
         # выбираем его до тех пор пока не выбираем город, которого нет в sessionStorage[user_id]['guessed_cities']
