@@ -45,6 +45,7 @@ def main():
 
 def handle_dialog(res, req):
     user_id = req['session']['user_id']
+    res['response']['buttons'] = [{'title': 'Помощь'}]
     if req['session']['new']:
         res['response']['text'] = 'Привет! Назови своё имя!'
         sessionStorage[user_id] = {
@@ -97,8 +98,6 @@ def handle_dialog(res, req):
             elif 'нет' in req['request']['nlu']['tokens']:
                 res['response']['text'] = 'Ну и ладно!'
                 res['end_session'] = True
-            elif 'помощь' in req['request']['nlu']['tokens']:
-                res['response']['text'] = description
             else:
                 res['response']['text'] = 'Не поняла ответа! Так да или нет?'
                 res['response']['buttons'] = [
@@ -112,6 +111,8 @@ def handle_dialog(res, req):
                     }
                 ]
         else:
+            if 'помощь' in req['request']['nlu']['tokens']:
+                res['response']['text'] = description
             play_game(res, req)
 
 
