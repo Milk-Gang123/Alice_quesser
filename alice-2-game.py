@@ -45,8 +45,10 @@ def main():
 
 def handle_dialog(res, req):
     user_id = req['session']['user_id']
-    # help
-    res['response']['buttons'] = [{'title': 'Помощь'}]
+    res['response']['buttons'] = [
+        {
+            'title': 'Помощь'
+        }]
     if req['session']['new']:
         res['response']['text'] = 'Привет! Назови своё имя!'
         sessionStorage[user_id] = {
@@ -74,6 +76,9 @@ def handle_dialog(res, req):
                 {
                     'title': 'Нет',
                     'hide': True
+                },
+                {
+                    'title': 'Помощь'
                 }
             ]
     else:
@@ -109,6 +114,9 @@ def handle_dialog(res, req):
                     {
                         'title': 'Нет',
                         'hide': True
+                    },
+                    {
+                        'title': 'Помощь'
                     }
                 ]
         else:
@@ -120,7 +128,10 @@ def handle_dialog(res, req):
 def play_game(res, req):
     user_id = req['session']['user_id']
     attempt = sessionStorage[user_id]['attempt']
-    res['response']['buttons'] = [{'title': 'Помощь'}]
+    res['response']['buttons'] = [
+        {
+            'title': 'Помощь'
+        }]
     if attempt == 1:
         # если попытка первая, то случайным образом выбираем город для гадания
         city = random.choice(list(cities))
