@@ -17,6 +17,16 @@ cities = {
 
 sessionStorage = {}
 
+description = """
+                 Добро пожаловать в игру угадай город!
+                 
+                 Для начала вам нужно представиться.
+                 
+                 Далее необходимо угадать город.
+                 
+                 После раунда угадайки можно сыграть еще раз
+                 """
+
 
 @app.route('/post', methods=['POST'])
 def main():
@@ -87,6 +97,8 @@ def handle_dialog(res, req):
             elif 'нет' in req['request']['nlu']['tokens']:
                 res['response']['text'] = 'Ну и ладно!'
                 res['end_session'] = True
+            elif 'помощь' in req['request']['nlu']['tokens']:
+                res['response']['text'] = description
             else:
                 res['response']['text'] = 'Не поняла ответа! Так да или нет?'
                 res['response']['buttons'] = [
@@ -106,6 +118,7 @@ def handle_dialog(res, req):
 def play_game(res, req):
     user_id = req['session']['user_id']
     attempt = sessionStorage[user_id]['attempt']
+    res['response']['buttons'] = [{'title': 'Помощь'}]
     if attempt == 1:
         # если попытка первая, то случайным образом выбираем город для гадания
         city = random.choice(list(cities))
