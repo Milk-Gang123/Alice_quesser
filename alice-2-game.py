@@ -130,7 +130,6 @@ def play_game(res, req):
     user_id = req['session']['user_id']
     attempt = sessionStorage[user_id]['attempt']
     if attempt == 1:
-        # Popik
         # если попытка первая, то случайным образом выбираем город для гадания
         city = random.choice(list(cities))
         # выбираем его до тех пор пока не выбираем город, которого нет в sessionStorage[user_id]['guessed_cities']
@@ -152,6 +151,13 @@ def play_game(res, req):
             # если да, то добавляем город к sessionStorage[user_id]['guessed_cities'] и
             # отправляем пользователя на второй круг. Обратите внимание на этот шаг на схеме.
             res['response']['text'] = 'Правильно! Сыграем ещё?'
+            res['response']['buttons'].append({
+                "title": "Ладно",
+                "url": f"https://market.yandex.ru/search?text={city}"
+            }
+            )
+            # "title": "Ладно",
+            #             "url": f"https://market.yandex.ru/search?text={str(animal)[:-1]}"
             sessionStorage[user_id]['guessed_cities'].append(city)
             sessionStorage[user_id]['game_started'] = False
             return
