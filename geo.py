@@ -42,10 +42,10 @@ def get_geo_info(city_name, type_info):
         toponym = json_response["response"]["GeoObjectCollection"]["featureMember"][0]["GeoObject"]
         if type_info == 'country':
             city = toponym['metaDataProperty']['GeocoderMetaData']['Address']['Components'][0]['name']
-            print(city)
+            return city
         if type_info == 'coordinates':
             ll = toponym["Point"]["pos"]
-            print(ll)
+            return ll
     else:
         return 'Error'
 

@@ -4,11 +4,12 @@ from flask import Flask, request
 import logging
 import json
 import random
+from geo import get_geo_info
 
 app = Flask(__name__)
 
 logging.basicConfig(level=logging.INFO)
-
+f = 0
 cities = {
     'москва': ['1540737/daa6e420d33102bf6947', '213044/7df73ae4cc715175059e'],
     'нью-йорк': ['1652229/728d5c86707054d4745f', '1030494/aca7ed7acefde2606bdc'],
@@ -131,6 +132,7 @@ def handle_dialog(res, req):
 
 
 def play_game(res, req):
+    global f
     user_id = req['session']['user_id']
     attempt = sessionStorage[user_id]['attempt']
     if attempt == 1:
@@ -154,6 +156,12 @@ def play_game(res, req):
         if get_city(req) == city:
             # если да, то добавляем город к sessionStorage[user_id]['guessed_cities'] и
             # отправляем пользователя на второй круг. Обратите внимание на этот шаг на схеме.
+            f = 1
+            res['response']['text'] = 'Правильно! А в какой стране этот город?'
+            return
+        country = get_geo_info(city, 'country')
+        if country == city and f == 1:
+            f = 0
             res['response']['text'] = 'Правильно! Сыграем ещё?'
             res['response']['buttons'] = [
                 {
