@@ -172,6 +172,7 @@ def play_game(res, req):
             sessionStorage[user_id]['guessed_cities'].append(city)
             sessionStorage[user_id]['game_started'] = False
             return
+        # Whyyy!??!?!
         else:
             # если нет
             if attempt == 3:
