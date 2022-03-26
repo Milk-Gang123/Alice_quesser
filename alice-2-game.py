@@ -156,7 +156,15 @@ def play_game(res, req):
                 "title": "Покажи на карте",
                 "url": f"https://yandex.ru/maps/?mode=search&text={city}",
                 "hide": True
-            }
+            },
+                {
+                    'title': 'Да',
+                    'hide': True
+                },
+                {
+                    'title': 'Нет',
+                    'hide': True
+                }
             )
             sessionStorage[user_id]['guessed_cities'].append(city)
             sessionStorage[user_id]['game_started'] = False
@@ -175,7 +183,15 @@ def play_game(res, req):
                     "title": "Покажи на карте",
                     "url": f"https://yandex.ru/maps/?mode=search&text={city}",
                     "hide": True
-                }
+                },
+                    {
+                        'title': 'Да',
+                        'hide': True
+                    },
+                    {
+                        'title': 'Нет',
+                        'hide': True
+                    }
                 )
                 return
             else:
