@@ -61,7 +61,7 @@ def handle_dialog(res, req):
         res['response']['text'] = description
 
     elif 'покажи на карте' in req['request']['nlu']['tokens']:
-        res['response']['text'] = 'Вот этот город на карте'
+        res['response']['text'] = 'Показываю город на карте'
 
 
     elif sessionStorage[user_id]['first_name'] is None:
