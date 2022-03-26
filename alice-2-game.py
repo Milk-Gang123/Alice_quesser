@@ -164,7 +164,7 @@ def play_game(res, req):
             if country.lower() == sessionStorage[user_id]['city'].lower():
                 res['response']['text'] = 'Правильно! Сыграем ещё?'
             else:
-                res['response']['text'] = f'Неправильно. Он находится в стране {country}\nСыграем ещё?'
+                res['response']['text'] = f'Неправильно. Он находится в стране {country}\n, а вы указали {sessionStorage[user_id]["city"]}. Сыграем ещё?'
             f = 0
             res['response']['buttons'] = [
                 {
