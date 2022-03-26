@@ -153,18 +153,12 @@ def play_game(res, req):
         # сюда попадаем, если попытка отгадать не первая
         city = sessionStorage[user_id]['city']
         # проверяем есть ли правильный ответ в сообщение
-        if get_city(req) == city:
-            # если да, то добавляем город к sessionStorage[user_id]['guessed_cities'] и
-            # отправляем пользователя на второй круг. Обратите внимание на этот шаг на схеме.
-            f = 1
-            res['response']['text'] = 'Правильно! А в какой стране этот город?'
-            return
         country = get_geo_info(city, 'country')
         if f == 1:
-            if country.lower() == sessionStorage[user_id]['city'].lower():
+            if country.lower() == city:
                 res['response']['text'] = 'Правильно! Сыграем ещё?'
             else:
-                res['response']['text'] = f'Неправильно. Он находится в стране {country}\n, а вы указали {sessionStorage[user_id]["city"]}. Сыграем ещё?'
+                res['response']['text'] = f'Неправильно. Он находится в стране, {country}\nа вы указали {city}. Сыграем ещё?'
             f = 0
             res['response']['buttons'] = [
                 {
@@ -182,6 +176,12 @@ def play_game(res, req):
                 }]
             sessionStorage[user_id]['guessed_cities'].append(city)
             sessionStorage[user_id]['game_started'] = False
+            return
+        if get_city(req) == city and f == 0:
+            # если да, то добавляем город к sessionStorage[user_id]['guessed_cities'] и
+            # отправляем пользователя на второй круг. Обратите внимание на этот шаг на схеме.
+            f = 1
+            res['response']['text'] = 'Правильно! А в какой стране этот город?'
             return
         # Whyyy!??!?!
         else:
