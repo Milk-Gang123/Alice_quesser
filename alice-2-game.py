@@ -60,6 +60,9 @@ def handle_dialog(res, req):
     if 'помощь' in req['request']['nlu']['tokens']:
         res['response']['text'] = description
 
+    elif 'покажи на карте' in req['request']['nlu']['tokens']:
+        res['response']['text'] = 'Вот этот город на карте'
+
 
     elif sessionStorage[user_id]['first_name'] is None:
         first_name = get_first_name(req)
