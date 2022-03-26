@@ -60,6 +60,7 @@ def handle_dialog(res, req):
     if 'помощь' in req['request']['nlu']['tokens']:
         res['response']['text'] = description
 
+
     elif sessionStorage[user_id]['first_name'] is None:
         first_name = get_first_name(req)
         if first_name is None:
@@ -152,8 +153,9 @@ def play_game(res, req):
             # отправляем пользователя на второй круг. Обратите внимание на этот шаг на схеме.
             res['response']['text'] = 'Правильно! Сыграем ещё?'
             res['response']['buttons'].append({
-                "title": "Ладно",
-                "url": f"https://market.yandex.ru/search?text={city}"
+                "title": "Покажи на карте",
+                "url": f"https://market.yandex.ru/search?text={city}",
+                "hide": True
             }
             )
             # "title": "Ладно",
