@@ -171,6 +171,12 @@ def play_game(res, req):
                 res['response']['text'] = f'Вы пытались. Это {city.title()}. Сыграем ещё?'
                 sessionStorage[user_id]['game_started'] = False
                 sessionStorage[user_id]['guessed_cities'].append(city)
+                res['response']['buttons'].append({
+                    "title": "Покажи на карте",
+                    "url": f"https://yandex.ru/maps/?mode=search&text={city}",
+                    "hide": True
+                }
+                )
                 return
             else:
                 # иначе показываем следующую картинку
