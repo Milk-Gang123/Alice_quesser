@@ -161,8 +161,11 @@ def play_game(res, req):
             return
         country = get_geo_info(city, 'country')
         if f == 1:
+            if country == sessionStorage[user_id]['city']:
+                res['response']['text'] = 'Правильно! Сыграем ещё?'
+            else:
+                res['response']['text'] = f'Неправильно. Он находится в стране {country}\nСыграем ещё?'
             f = 0
-            res['response']['text'] = 'Правильно! Сыграем ещё?'
             res['response']['buttons'] = [
                 {
                     "title": "Покажи на карте",
