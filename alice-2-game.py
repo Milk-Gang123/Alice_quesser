@@ -155,10 +155,10 @@ def play_game(res, req):
         # проверяем есть ли правильный ответ в сообщение
         country = get_geo_info(city, 'country')
         if f == 1:
-            if country.lower() == city:
+            if country.lower() == req['request']['original_utterance'].lower():
                 res['response']['text'] = 'Правильно! Сыграем ещё?'
             else:
-                res['response']['text'] = f'Неправильно. Он находится в стране, {country}\nа вы указали {city}. Сыграем ещё?'
+                res['response']['text'] = f'Неправильно. Он находится в стране {country},\nа вы указали {req["request"]["original_utterance"]}. Сыграем ещё?'
             f = 0
             res['response']['buttons'] = [
                 {
