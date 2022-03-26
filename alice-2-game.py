@@ -158,8 +158,6 @@ def play_game(res, req):
                 "hide": True
             }
             )
-            # "title": "Ладно",
-            #             "url": f"https://market.yandex.ru/search?text={str(animal)[:-1]}"
             sessionStorage[user_id]['guessed_cities'].append(city)
             sessionStorage[user_id]['game_started'] = False
             return
