@@ -154,7 +154,7 @@ def play_game(res, req):
             res['response']['text'] = 'Правильно! Сыграем ещё?'
             res['response']['buttons'].append({
                 "title": "Покажи на карте",
-                "url": f"https://market.yandex.ru/search?text={city}",
+                "url": f"https://yandex.ru/maps/?mode=search&text={city}",
                 "hide": True
             }
             )
