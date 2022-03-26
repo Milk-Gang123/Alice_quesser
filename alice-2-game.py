@@ -160,7 +160,7 @@ def play_game(res, req):
             res['response']['text'] = 'Правильно! А в какой стране этот город?'
             return
         country = get_geo_info(city, 'country')
-        if country == city and f == 1:
+        if f == 1:
             f = 0
             res['response']['text'] = 'Правильно! Сыграем ещё?'
             res['response']['buttons'] = [
