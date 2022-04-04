@@ -2,38 +2,6 @@ import requests
 from math import sin, cos, sqrt, atan2, radians
 
 
-def get_coordinates(city):
-    url = "https://geocode-maps.yandex.ru/1.x/"
-    params = {
-        'geocode': city,
-        'format': 'json',
-        'apikey': "40d1649f-0493-4b70-98ba-98533de7710b"
-    }
-    response = requests.get(url, params)
-    json = response.json()
-    point_str = json['response']['GeoObjectCollection']['featureMember'][0]['GeoObject']['Point']['pos']
-    point_array = [float(x) for x in point_str.split(' ')]
-
-    return point_array
-
-
-def get_country(city_name):
-    url = "https://geocode-maps.yandex.ru/1.x/"
-    params = {
-        'geocode': city_name,
-        'format': 'json',
-        'apikey': "40d1649f-0493-4b70-98ba-98533de7710b"
-    }
-    response = requests.get(url, params)
-    json = response.json()
-    point_str = \
-        json["response"]["GeoObjectCollection"]["featureMember"][0]["GeoObject"]["metaDataProperty"][
-            "GeocoderMetaData"][
-            "AddressDetails"]["Country"]["CountryName"]
-
-    return point_str
-
-
 def get_geo_info(city_name, type_info):
     geocoder_request = f"http://geocode-maps.yandex.ru/1.x/?apikey=40d1649f-0493-4b70-98ba-98533de7710b&geocode={city_name}&format=json"
     response = requests.get(geocoder_request)
