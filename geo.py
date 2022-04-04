@@ -15,7 +15,7 @@ def get_geo_info(city_name, type_info):
             ll = toponym["Point"]["pos"]
             return ll
     else:
-        return 'Error'
+        return 'Error' # don't needed
 
 
 def get_distance(p1, p2):
